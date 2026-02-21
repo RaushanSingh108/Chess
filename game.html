@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chess Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <button onclick="goHome()">Home</button>
+        <h2 id="status">White's Turn</h2>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+
+    <div id="board"></div>
+
+    <script src="js/game.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameMode = urlParams.get("mode") || "friend";
+    </script>
+</body>
+
+</html>

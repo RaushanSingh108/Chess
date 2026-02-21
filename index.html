@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chess Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- MENU BAR -->
+    <nav class="navbar">
+        <div class="logo">♟ Chess</div>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#play">Play</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="home-container" id="play">
+        <h1>Welcome to Chess</h1>
+        <p>Choose your game mode</p>
+
+        <div class="menu-buttons">
+            <button onclick="playWithFriend()">♟ Play with Friend</button>
+            <button onclick="toggleDifficulty()">🤖 Play with Computer</button>
+
+            <div id="difficultyOptions" class="difficulty-panel">
+                <p class="difficulty-title">Select Difficulty</p>
+
+                <button class="difficulty-btn easy" onclick="startComputerGame('easy')">
+        Easy
+    </button>
+
+                <button class="difficulty-btn medium" onclick="startComputerGame('medium')">
+        Medium
+    </button>
+
+                <button class="difficulty-btn hard" onclick="startComputerGame('hard')">
+        Hard
+    </button>
+            </div>
+        </div>
+
+        <script src="js/navigation.js"></script>
+</body>
+
+</html>
