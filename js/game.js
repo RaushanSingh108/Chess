@@ -7,6 +7,32 @@ const statusText = document.getElementById("status");
 const params = new URLSearchParams(window.location.search);
 const gameMode = params.get("mode") || "friend";
 
+/* ======================
+   SOUND SETTINGS
+====================== */
+let soundEnabled = true;
+const savedSound = localStorage.getItem("soundEnabled");
+if (savedSound !== null) soundEnabled = savedSound === "true";
+
+/* ======================
+   SOUND SYSTEM
+====================== */
+const sounds = {
+    move: new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3"),
+    capture: new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3"),
+    check: new Audio("https://www.soundjay.com/buttons/sounds/button-09.mp3"),
+    gameOver: new Audio("https://www.soundjay.com/buttons/sounds/button-4.mp3")
+};
+
+function playSound(type) {
+    if (!soundEnabled || !sounds[type]) return;
+    sounds[type].currentTime = 0;
+    sounds[type].play();
+}
+
+/* ======================
+   GAME STATE
+====================== */
 let board = [];
 let currentPlayer = "white";
 let selectedPiece = null;
@@ -102,6 +128,14 @@ function highlightMoves(sr, sc) {
 ====================== */
 function movePiece(sr, sc, dr, dc) {
     const piece = board[sr][sc];
+    const capturedPiece = board[dr][dc];
+
+    // 🔊 SOUND
+    if (capturedPiece) {
+        playSound("capture");
+    } else {
+        playSound("move");
+    }
 
     board[dr][dc] = piece;
     board[sr][sc] = null;
@@ -135,14 +169,15 @@ function evaluateGameState() {
         gameOver = true;
         statusText.textContent =
             `CHECKMATE – ${capitalize(currentPlayer === "white" ? "black" : "white")} Wins`;
-        alert(statusText.textContent);
+        showGameOverMenu(statusText.textContent);
     } else if (!inCheck && !hasMoves) {
         gameOver = true;
         statusText.textContent = "STALEMATE – Draw";
-        alert(statusText.textContent);
+        showGameOverMenu(statusText.textContent);
     } else if (inCheck) {
         statusText.textContent =
             `CHECK – ${capitalize(currentPlayer)} King in danger`;
+        playSound("check");
     } else {
         statusText.textContent = `${capitalize(currentPlayer)}'s Turn`;
     }
@@ -265,9 +300,23 @@ function capitalize(s) {
 }
 
 /* ======================
+   GAME OVER MENU
+====================== */
+function showGameOverMenu(text) {
+    playSound("gameOver");
+    document.getElementById("gameOverText").textContent = text;
+    document.getElementById("gameOverMenu").style.display = "flex";
+}
+
+function hideGameOverMenu() {
+    document.getElementById("gameOverMenu").style.display = "none";
+}
+
+/* ======================
    RESTART
 ====================== */
 function restartGame() {
+    hideGameOverMenu();
     gameOver = false;
     currentPlayer = "white";
     selectedPiece = null;

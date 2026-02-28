@@ -9,44 +9,109 @@
 
 <body>
 
-    <!-- MENU BAR -->
     <nav class="navbar">
         <div class="logo">♟ Chess</div>
         <ul class="menu">
             <li><a href="#">Home</a></li>
             <li><a href="#play">Play</a></li>
-            <li><a href="#settings">Settings</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#" onclick="openAbout()">About</a></li>
         </ul>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <div class="home-container" id="play">
-        <h1>Welcome to Chess</h1>
-        <p>Choose your game mode</p>
+        <div class="home-card">
+            <h1>Welcome to Chess</h1>
+            <p class="subtitle">Choose your game mode</p>
 
-        <div class="menu-buttons">
-            <button onclick="playWithFriend()">♟ Play with Friend</button>
-            <button onclick="toggleDifficulty()">🤖 Play with Computer</button>
+            <button class="main-btn" onclick="playWithFriend()">♟ Play with Friend</button>
+
+            <button class="main-btn" onclick="toggleDifficulty()">🤖 Play with Computer</button>
 
             <div id="difficultyOptions" class="difficulty-panel">
                 <p class="difficulty-title">Select Difficulty</p>
 
-                <button class="difficulty-btn easy" onclick="startComputerGame('easy')">
-        Easy
-    </button>
-
-                <button class="difficulty-btn medium" onclick="startComputerGame('medium')">
-        Medium
-    </button>
-
-                <button class="difficulty-btn hard" onclick="startComputerGame('hard')">
-        Hard
-    </button>
+                <button class="difficulty-btn easy" onclick="startComputerGame('easy')">Easy</button>
+                <button class="difficulty-btn medium" onclick="startComputerGame('medium')">Medium</button>
+                <button class="difficulty-btn hard" onclick="startComputerGame('hard')">Hard</button>
             </div>
-        </div>
 
-        <script src="js/navigation.js"></script>
+            <button class="secondary-btn" onclick="openSettings()">⚙ Settings</button>
+        </div>
+    </div>
+
+    <!-- ================= ABOUT MODAL ================= -->
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAbout()">&times;</span>
+
+            <h2>♟ About Chess</h2>
+
+            <p class="about-text">
+                Chess is a classic strategy game that tests logic, patience, and foresight. This web-based version is built to provide a smooth and modern gameplay experience.
+            </p>
+
+            <div class="about-section">
+                <h3>🎮 Game Modes</h3>
+                <ul>
+                    <li>Play with Friend (Local 2-Player)</li>
+                    <li>Play with Computer (Easy / Medium / Hard)</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h3>🧩 Features</h3>
+                <ul>
+                    <li>Legal move validation</li>
+                    <li>Check & Checkmate detection</li>
+                    <li>Undo functionality</li>
+                    <li>Game-style difficulty selector</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h3>🚀 Coming Soon</h3>
+                <ul>
+                    <li>Stronger AI (Minimax)</li>
+                    <li>Move history panel</li>
+                    <li>Sound effects & animations</li>
+                    <li>Online multiplayer</li>
+                </ul>
+            </div>
+
+            <p class="version">Version 1.0</p>
+        </div>
+    </div>
+    <!-- ================= SETTINGS MODAL ================= -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeSettings()">&times;</span>
+
+            <h2>⚙ Settings</h2>
+
+            <!-- BOARD THEME -->
+            <div class="settings-section">
+                <h3>🎨 Board Theme</h3>
+                <select id="themeSelect">
+                <option value="classic">Classic</option>
+                <option value="dark">Dark</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+            </div>
+
+            <!-- SOUND TOGGLE -->
+            <div class="settings-section">
+                <h3>🔊 Sound</h3>
+                <button id="soundToggleBtn" onclick="toggleSound()">ON</button>
+            </div>
+
+            <button class="main-btn" onclick="saveSettings()">Save</button>
+        </div>
+    </div>
+
+    <script src="js/navigation.js"></script>
 </body>
 
 </html>

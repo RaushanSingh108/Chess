@@ -15,6 +15,17 @@
     </div>
 
     <div id="board"></div>
+    <!-- ================= GAME OVER MENU ================= -->
+    <div id="gameOverMenu" class="game-over-overlay">
+        <div class="game-over-card">
+            <h2 id="gameOverText">Game Over</h2>
+
+            <div class="game-over-buttons">
+                <button onclick="restartGame()">🔁 Restart</button>
+                <button onclick="goHome()">🏠 Home</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/game.js"></script>
     <script>

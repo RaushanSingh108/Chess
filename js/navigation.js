@@ -30,3 +30,34 @@ function toggleDifficulty() {
 function startComputerGame(level) {
     window.location.href = `game.html?mode=computer&level=${level}`;
 }
+
+function openAbout() {
+    document.getElementById("aboutModal").style.display = "flex";
+}
+
+function closeAbout() {
+    document.getElementById("aboutModal").style.display = "none";
+}
+
+function openSettings() {
+    document.getElementById("settingsModal").style.display = "flex";
+}
+
+function closeSettings() {
+    document.getElementById("settingsModal").style.display = "none";
+}
+
+function saveSettings() {
+    const theme = document.getElementById("themeSelect").value;
+    localStorage.setItem("boardTheme", theme);
+
+    localStorage.setItem("soundEnabled", soundEnabled);
+
+    closeSettings();
+    alert("Settings Saved!");
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById("soundToggleBtn").textContent = soundEnabled ? "ON" : "OFF";
+}
